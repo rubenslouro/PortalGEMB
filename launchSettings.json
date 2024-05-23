@@ -1,0 +1,17 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "configuracaogeralapi": "StartDebugging",
+        "loginapi": "StartDebugging",
+        "mainserviceapi": "StartDebugging",
+        "regrasistemaapi": "StartDebugging",
+        "tipousuarioapi": "StartDebugging",
+        "usuarioapi": "StartDebugging",
+        "webcore": "StartWithoutDebugging"
+      }
+    }
+  }
+}

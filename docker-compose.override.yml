@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+
+  webcore:
+    container_name: webcore.webapp
+    hostname: webcorewebapp
+    environment:
+    - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+    - "5001:80"    
+    volumes:
+    - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    - c:\Dados:/app/AppConfig
+    networks:
+    - network
+
+  mainserviceapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8080:80"
+    volumes:
+    - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    - c:\Dados:/app/AppConfig 
+    networks:
+     - network
+
+
+
+networks:
+  network:
+     name: network

@@ -1,0 +1,67 @@
+﻿@using UtilService
+@using UtilService.Util
+@model Domain.Entities.TurmaIndex
+@{
+    ViewData["Title"] = "Visualizar Turma";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12 top-bar">
+        <a title="Clique aqui para ser direcionado a listagem de cadastro de turmas" class="btn btn-primary pull-right" href="@Url.Action("Index", "Turma", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+    </div>
+</div>
+<fieldset>
+    <legend>Dados de Idenficação</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_ID_Turma, null, new { @class = "control-label" })
+                <p>@Model.Turm_ID_Turma</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_NM_Disciplina, null, new { @class = "control-label" })
+                <p>@Model.Turm_NM_Disciplina</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_TX_Descricao, null, new { @class = "control-label" })
+                <p>@Model.Turm_TX_Descricao</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_DT_Inicio, null, new { @class = "control-label" })
+                <p>@Model.Turm_DT_Inicio</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_DT_Final, null, new { @class = "control-label" })
+                <p>@Model.Turm_DT_Final</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Informações Extras</legend>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Turm_TX_Observacao, null, new { @class = "control-label" })
+                <p>@Model.Turm_TX_Observacao</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/turma/PageVisualizar.js"></script>
+}

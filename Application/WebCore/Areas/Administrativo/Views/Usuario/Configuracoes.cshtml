@@ -1,0 +1,209 @@
+﻿@using UtilService.Util;
+@model Domain.Dtos.Usuario.RetornaDetalhado.Output.UsuarioRetornaDetalhadoOutModel
+@{
+    ViewData["Title"] = "Configurações de usuário";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+@Html.HiddenFor(h => h.Codigo, new { id = "hiddenCodUsuario" })
+@Html.HiddenFor(h => h.Nome, new { id = "hiddenNomeUsuario" })
+<input type="hidden" value="@Url.Action("Configuracoes", "Usuario", new {codUsuario = Model.Codigo})" id="hiddenUrlConfiguracoesUsuario" />
+
+<div class="row">
+    <div class="col-lg-12 top-bar">
+        @if (!Model.DataAfastamento.HasValue)
+        {
+            <a title="Clique aqui para editar este usuários" class="btn btn-primary pull-right" href="@Url.Action("Editar", "Usuario", new {Area = "Administrativo", codUsuario = Model.Codigo})"><i class="fa fa-edit"></i> Editar</a>
+        }
+        <a title="Clique aqui para ser direcionado a listagem de usuários" class="btn btn-primary pull-right" href="@Url.Action("Index", "Usuario")"><i class="fa fa-th-list"></i> Usuários</a>
+        @if (!Model.DataAfastamento.HasValue)
+        {
+
+            <button id="btnIniciarAfastamento" title="Clique aqui para afastar o usuário selecionado" type="button" class="btn btn-danger pull-right"><i class="fa fa-thumbs-down"></i> Afastar</button>
+        }
+        else
+        {
+            <button id="btnIniciarAtivacao" title="Clique aqui para reativar o usuário selecionado" type="button" class="btn btn-success pull-right"><i class="fa fa-thumbs-up"></i> Ativar usuário</button>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        @if (!Model.DataAfastamento.HasValue)
+        {
+            <b class="positivo status-cliente-grande">ATIVO <i class="fa fa-thumbs-up"></i></b>
+        }
+        else
+        {
+            <b class="negativo status-cliente-grande">AFASTADO <i class="fa fa-thumbs-down"></i></b>
+        }
+    </div>
+</div>
+<fieldset>
+    <legend>Nível de acesso</legend>
+    <div class="row">
+        <div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TipoUsuarioDescricao, null, new { @class = "control-label" })
+                    <p>@Html.DisplayFor(x => x.TipoUsuarioDescricao)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Login</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Codigo, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.Codigo)</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.Email)</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Identificadores</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Nome, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.Nome)</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Informações de cadastramento</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.UsuarioCadastro, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.UsuarioCadastro)</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.DataCadastro, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.DataCadastro)</p>
+            </div>
+        </div>
+    </div>
+    @if (Model.DataAfastamento.HasValue)
+    {
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.DataAfastamento, null, new { @class = "control-label" })
+                    <p>@Model.DataAfastamento.ToFormatedData()</p>
+                </div>
+            </div>
+        </div>
+    }
+</fieldset>
+<fieldset>
+    <legend>Permissões de acesso </legend>
+
+    <div class="row" id="areaPermissoes">
+        @if (Model.EhUsuarioLogado)
+        {
+            <div class="col-lg-12">
+                <div class="alert alert-danger">
+                    <b>Atenção</b><br />
+                    Muito cuidado ao gerenciar suas próprias permissões. Caso remova alguma permissão crítica
+                    como por exemplo <b>Cadastro de usuário</b>, seu acesso sobre o
+                    <b>
+                       O cadastro de usuário
+                    </b> será suspenso
+                    e você somente poderá receber a permissão novamente se solicitar a um
+                    usuário que possa atribuí-la ou através do suporte técnico.
+                </div>
+            </div>
+        }
+
+
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Permissões disponíveis
+                </div>
+                <div class="panel-body backgroud-permissoes-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group" id="areaBotoesPermissoesInativas">
+                                <input type="text" class="form-control" id="txtPesquisaPermissaoInativa" placeholder="Busca ...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btnPesquisarPermissaoInativa" title="Clique aqui para buscar a permissão desejada" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnLimparPermissaoInativa" title="Limpar caixa de pesquisa" type="button">
+                                        <i class="fa fa-eraser "></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnAdicionarTodasPermissoes" title="Adicionar todas as permissões" type="button">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="height: 250px; overflow: auto">
+                        <div class="col-lg-12" id="regrasNaoAtribuidasArea">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Permissões atribuídas
+                </div>
+                <div class="panel-body backgroud-permissoes-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group" id="areaBotoesPermissoesAtivas">
+                                <input type="text" class="form-control" id="txtPesquisaPermissaoAtiva" placeholder="Busca ...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btnPesquisarPermissaoAtiva" title="Clique aqui para buscar a permissão desejada" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnLimparPermissaoAtiva" title="Limpar caixa de pesquisa" type="button">
+                                        <i class="fa fa-eraser"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnRemoverTodasPermissoes" title="Remover todas as permissões" type="button">
+                                        <i class="fa fa-minus-circle"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="height: 250px; overflow: auto">
+                        <div class="col-lg-12" id="regrasAtribuidasArea">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+@if (Model.PermiteLog)
+{
+    @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/Logs.cshtml", Model.Log)
+}
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/Usuario/ConfiguracoesPage.js"></script>
+}
+
+
+

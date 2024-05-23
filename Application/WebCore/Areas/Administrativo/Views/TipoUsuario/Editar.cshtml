@@ -1,0 +1,60 @@
+﻿@using System.Web
+@model Domain.Dtos.TipoUsuario.Editar.Input.TipoUsuarioEditarTipoUsuarioInModel
+@{
+    ViewBag.Title = "Edição de tipo de usuário";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+
+}
+@using (Html.BeginForm("Editar", "TipoUsuario", new { Area = "Administrativo" }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Codigo)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de tipos de usuário." class="btn btn-primary pull-right" href="@Url.Action("Index", "TipoUsuario", new {Area = "Administrativo"})"><i class="fa fa-th-list"></i> Tipos de usuário</a>
+            <a title="Clique aqui para Configuracoes este tipo de usuário" class="btn btn-primary pull-right" href="@Url.Action("Configuracoes", "TipoUsuario", new {Area = "Administrativo", codTipoUsuario = Model.Codigo})"><i class="fa fa-gear"></i> Configurações</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Informações do tipo de usuário</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Codigo)
+                    <p>@Html.DisplayFor(x => x.Codigo)</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Descricao, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control", apenasletras = true, 
+                        id = "txtTipoUsuarioDescricao", codigoRef = Model.Codigo, autopesquisa = Url.Action("PesquisaTipoUsuarioDescricao", "TipoUsuario"),
+                        placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.Descricao)) })
+                    @Html.ValidationMessageFor(x => x.Descricao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar o tipo de usuário código @Model.Codigo."><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+@section Scripts
+{
+
+
+}
+
+
+
+

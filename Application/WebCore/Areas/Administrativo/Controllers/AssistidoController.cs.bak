@@ -1,0 +1,60 @@
+﻿using Domain.DomainServicesInterfaces;
+using Domain.Dtos.Assistido.Criar.Input;
+using Domain.Entities;
+using Domain.Enums;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+using UtilService.Util;
+using WebCore.Areas.AreaManager;
+using WebCore.DTO.SimpleError;
+using WebCore.Services.LoginAuthentication;
+
+namespace WebCore.Areas.Administrativo.Controllers;
+
+/// <inheritdoc />
+[CheckNivelPermissao]
+[Area("Administrativo")]
+
+public class AssistidoController : Controller
+{
+    public IActionResult Index()
+    {
+        return View();
+    }
+    
+    public IActionResult Criar()
+    {
+        CarregarSessaoEnum();
+
+        return View();
+    }
+
+    public void CarregarSessaoEnum()
+    {
+        IList<SelectListItem> simnao = Enum.GetValues(typeof(TipoSimNao)).Cast<TipoSimNao>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        IList<SelectListItem> sexo = Enum.GetValues(typeof(TipoSexo)).Cast<TipoSexo>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        //IList<SelectListItem> tipomoradia = Enum.GetValues(typeof(TipoMoradia)).Cast<TipoMoradia>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        //IList<SelectListItem> escolaridade = Enum.GetValues(typeof(TipoEscolaridade)).Cast<TipoEscolaridade>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        //IList<SelectListItem> estadocivil = Enum.GetValues(typeof(TipoEstadoCivil)).Cast<TipoEstadoCivil>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        IList<SelectListItem> dependente = Enum.GetValues(typeof(QuantidadeDependente)).Cast<QuantidadeDependente>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+        //IList<SelectListItem> atividaderemunerada = Enum.GetValues(typeof(TipoAtividadeRemunerada)).Cast<TipoAtividadeRemunerada>().Select(x => new SelectListItem { Text = x.ToString(), Value = ((int)x).ToString() }).ToList();
+
+        ViewData["Sexo"] = new SelectList(sexo, "Value", "Text");
+        //ViewData["TipoMoradia"] = new SelectList(tipomoradia, "Value", "Text");
+        //ViewData["Escolaridade"] = new SelectList(escolaridade, "Value", "Text");
+        //ViewData["EstadoCivil"] = new SelectList(estadocivil, "Value", "Text");
+        ViewData["PossuiDeficienciaFisica"] = new SelectList(simnao, "Value", "Text");
+        ViewData["PossuiDeficienciaMental"] = new SelectList(simnao, "Value", "Text");
+        ViewData["PossuiProblemaSaude"] = new SelectList(simnao, "Value", "Text");
+        ViewData["PossuiDependente"] = new SelectList(dependente, "Value", "Text");
+        //ViewData["PossuiAtividadeRemunerada"] = new SelectList(atividaderemunerada, "Value", "Text");
+    }
+}
+

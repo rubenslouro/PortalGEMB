@@ -1,0 +1,61 @@
+﻿@using System.Web
+@model Domain.Dtos.TipoAtendimento.Input.TipoAtendimentoEditarInModel
+@{
+    ViewBag.Title = "Editar Tipo de Atendimento";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Editar", "TipoAtendimento", new { Area = "Administrativo" }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.TpAt_ID_TipoAtendimento)
+
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de enunciados" class="btn btn-primary pull-right" href="@Url.Action("Index", "TipoEnunciado", new {Area = "Administrativo"})"><i class="fa fa-th-list"></i> Listar</a>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Informações do tipo de atendimento</legend>
+        @*
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TpAt_ID_TipoAtendimento, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.TpAt_ID_TipoAtendimento, new { @class = "form-control", ApenasLetras = true })
+                </div>
+            </div>
+        </div> 
+        *@
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TpAt_NM_Descricao, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.TpAt_NM_Descricao, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar o tipo de atendimento, código @Model.TpAt_ID_TipoAtendimento"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+@section Scripts
+{
+
+}

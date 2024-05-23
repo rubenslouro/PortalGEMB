@@ -1,0 +1,108 @@
+﻿@using UtilService
+@using UtilService.Util
+@model Domain.Entities.TurmaDisciplina
+@{
+    ViewData["Title"] = "Lista de Turmas e Disciplinas";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@*
+<div class="row">
+    <div class="col-lg-12 top-bar">
+        <a title="Clique aqui para adicionar uma nova turma" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "Turma", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a>
+    </div>
+</div> 
+*@
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#turma" data-toggle="tab">Turma</a></li>
+        <li><a href="#disciplina" data-toggle="tab">Disciplina</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="active tab-pane" id="turma">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Turmas</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar uma nova turma" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "Turma", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table  table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Disciplina \ Turma</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.Turma)
+                            {
+                                <tr>
+                                    <td>@obj.Turm_ID_Turma</td>
+                                    <td>
+                                        @obj.Turm_NM_Disciplina<br />
+                                        @obj.Turm_TX_Descricao
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Visualizar", "Turma", new {Area = "Administrativo", codTurma = obj.Turm_ID_Turma})" title="Visualizar"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "Turma", new {Area = "Administrativo", codTurma = obj.Turm_ID_Turma})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="disciplina">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Disciplinas</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <a title="Clique aqui para adicionar uma nova disciplina" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "Disciplina", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table  table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.Disciplina)
+                            {
+                                <tr>
+                                    <td>@obj.Disc_ID_Disciplina</td>
+                                    <td>@obj.Disc_NM_Nome</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "Disciplina", new {Area = "Administrativo", codDisciplina = obj.Disc_ID_Disciplina})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="4">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@using System.Web
+@model Domain.Dtos.Atendimento.Input.AtendimentoAdicionarInModel
+@{
+    ViewData["Title"] = "Cadastro de Atendimentos";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "Atendimento", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(o => o.IDUsuarioCadastro)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de cadastro de atendimento" class="btn btn-primary pull-right" href="@Url.Action("Index", "Atendimento", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Dados de Idenficação</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Aten_ID_Assistido, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Aten_ID_Assistido, new { @class = "form-control", id = "txtCodAssistido" })
+                    @* <input type="text" asp-for="Aten_ID_Assistido" class="form-control" />  *@
+                    @Html.ValidationMessageFor(x => x.Aten_ID_Assistido, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Aten_NM_Nome, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Aten_NM_Nome, new { @class = "form-control", @readonly = "true", id = "txtNomeAssistido" })
+                    @Html.ValidationMessageFor(x => x.Aten_NM_Nome, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                @for (int i = 0; i < Model.ChechBoxList.Count; i++)
+                {
+                    @Html.CheckBoxFor(m => Model.ChechBoxList[i].IsChecked, new { id = "Chk-" + i, @class = "display: inline-block; width: 100px;" })
+                    @Html.LabelFor(m => Model.ChechBoxList[i].IsChecked, Model.ChechBoxList[i].Text, new { @for = "Chk-" + i, @class = "display: inline-block; width: 100px; background-color: red;" })
+                    @Html.HiddenFor(m => Model.ChechBoxList[i].Text)
+                    @Html.HiddenFor(m => Model.ChechBoxList[i].Value)
+                    <br />
+                }
+                @*
+                @foreach (var item in Model.ChechBoxList)
+                {
+                    @Html.HiddenFor(x => item.Value)
+                    @Html.CheckBoxFor(x => item.IsChecked, new { @class = "display: inline-block; width: 100px; " })
+                    @Html.LabelFor(x => item.IsChecked, item.Text, new { @class = "float:left;" })
+                    <br />
+                }
+                *@
+                <br />
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Informações Extras</legend>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="control-label" asp-for="Aten_TX_Observacao">Observações</label>
+                    @Html.TextAreaFor(x => x.Aten_TX_Observacao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Aten_TX_Observacao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar o atendimento"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/Atendimento/Page.js"></script>
+}

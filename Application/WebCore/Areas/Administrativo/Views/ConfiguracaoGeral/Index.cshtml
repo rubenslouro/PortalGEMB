@@ -1,0 +1,35 @@
+﻿@using System.Web
+@model Domain.Dtos.ConfiguracaoGeral.Output.ConfiguracaoGeralRetornaDetalhadoOutModel
+@{
+    ViewData["Title"] = "Configuração geral";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12 top-bar">
+        <a title="Clique aqui para editar as configurações básicas" class="btn btn-primary pull-right" href="@Url.Action("Editar","ConfiguracaoGeral", new { Area = "Administrativo"})"><i class="fa fa-edit"></i> Editar</a>
+    </div>
+</div>
+<fieldset>
+    <legend>Sobre o site</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.UrlSite, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.UrlSite, new { @class = "form-control text-lowercase", id = "txtSmtp", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.UrlSite)) })</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+@if (Model.PermiteLog)
+{
+    @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/Logs.cshtml", Model.Log)
+}
+
+@section Scripts{
+    <script type="module" src="~/appjs/Administrativo/ConfiguracaoGeral/IndexPage.js"></script>
+}
+
+

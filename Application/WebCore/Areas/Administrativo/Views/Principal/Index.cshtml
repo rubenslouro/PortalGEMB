@@ -1,0 +1,164 @@
+﻿@using WebCore.DTO.LoginWeb.Output;
+@{
+    // ViewData["Title"] = "Bem vindo";
+    ViewData["Caption"] = "Bem vindo";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+    var usuario = (LoginOutModel)ViewData["UsuarioLogado"];
+
+    var sexo = ViewBag.Sexo;
+    var qtdatendimentosexo = (ViewBag.QtdAtenSexo as List<int>);
+    var tipoatendimento = ViewBag.TipoAtendimento;
+    var qtdatendimento = (ViewBag.QtdTipoAtendimento as List<int>);
+
+    var sexoSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(sexo));
+    var qtdatendimentosexoSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(qtdatendimentosexo));
+    var tipoatendimentoSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(tipoatendimento));
+    var qtdatendimentoSerializado = Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(qtdatendimento));
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                Total por Tipo de Atendimento
+            </div>
+            <div class="card-body">
+                <canvas id="GrafTotalxSexo"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="card mb-4">
+            <div class="card-header">
+                Total por Tipo de Atendimento
+            </div>
+            <div class="card-body">
+                <canvas id="GrafTotalxTipoAtendimento" height="60"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var sexo = @sexoSerializado;
+        var qtdatendimentosexo = @qtdatendimentosexoSerializado;
+
+        var tipoatendimento = @tipoatendimentoSerializado;
+        var qtdatendimento = @qtdatendimentoSerializado;
+
+
+        setTimeout(function () {
+            // Obtendo uma referência para o canvas
+            var grfts = document.getElementById('GrafTotalxSexo').getContext('2d');
+            var grftta = document.getElementById('GrafTotalxTipoAtendimento').getContext('2d');
+
+            // Criando os dados para o gráfico de total por sexo
+            var dadosSexo = {
+                labels: sexo,
+                datasets: [{
+                    //label: 'Atendimentos',
+                    data: qtdatendimentosexo, // Valores de vendas para cada mês
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Criando os dados para o gráfico de total por tipo de atendimento
+            var dadosTipoAtendimento = {
+                labels: tipoatendimento,
+                datasets: [{
+                    // label: 'Tipo de Atendimentos',
+                    data: qtdatendimento, // Valores de vendas para cada mês
+                    backgroundColor: [
+                        'rgba(0, 148, 250, 0.5)',
+                        'rgba(255, 0, 0, 0.5)',
+                        'rgba(76, 190, 0, 0.5)',
+                        'rgba(0, 165, 165, 0.5)',
+                        'rgba(255, 204, 153, 0.5)',
+                        'rgba(153, 153, 0, 0.5)',
+                        'rgba(102, 51, 0, 0.5)',
+                        'rgba(0, 153, 0, 0.5)',
+                        'rgba(153, 51, 102, 0.5)',
+                        'rgba(0, 51, 0, 0.5)',
+                        'rgba(255, 216, 0, 0.5)',
+                        'rgba(82, 127, 118, 0.5)',
+                        'rgba(92, 64, 51, 0.5)',
+                        'rgba(142, 107, 35, 0.5)',
+                        'rgba(153, 50, 205, 0.5)',
+                        'rgba(255, 127, 0, 0.5)',
+                        'rgba(95, 159, 159, 0.5)',
+                        'rgba(35, 107, 142, 0.5)',
+                        'rgba(178, 0, 250, 0.5)',
+                        'rgba(168, 168, 168, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 148, 250, 1)',
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(76, 190, 0, 1)',
+                        'rgba(0, 165, 165, 1)',
+                        'rgba(255, 204, 153, 1)',
+                        'rgba(153, 153, 0, 1)',
+                        'rgba(102, 51, 0, 1)',
+                        'rgba(0, 153, 0, 1)',
+                        'rgba(153, 51, 102, 1)',
+                        'rgba(0, 51, 0, 1)',
+                        'rgba(255, 216, 0, 1)',
+                        'rgba(82, 127, 118, 1)',
+                        'rgba(92, 64, 51, 1)',
+                        'rgba(142, 107, 35, 1)',
+                        'rgba(153, 50, 205, 1)',
+                        'rgba(255, 127, 0, 1)',
+                        'rgba(95, 159, 159, 1)',
+                        'rgba(35, 107, 142, 1)',
+                        'rgba(178, 0, 250, 1)',
+                        'rgba(168, 168, 168, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            };
+
+            // Configurações do gráfico barra
+            var options = {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            };
+
+            // Criando o gráfico de barras total por sexo
+            var GraficoTotalxSexo = new Chart(grfts, {
+                type: 'bar',
+                data: dadosSexo,
+                options: options
+            });
+
+            // Criando o gráfico de barras total por tipo atendimento
+            var GraficoTotalxAtendimento = new Chart(grftta, {
+                type: 'bar',
+                data: dadosTipoAtendimento,
+                options: options
+            });
+
+        }, 2000);
+    </script>
+}

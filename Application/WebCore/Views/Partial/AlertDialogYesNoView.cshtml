@@ -1,0 +1,33 @@
+﻿@*<div class="modal fade" id="alertDialogYesNo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" >Pergunta importante</h4>
+            </div>
+            <div class="modal-body" id="alertDialogYesNoMensagemContent">
+                @ViewData["AlertDialogYesNoText"]
+          
+            </div>
+            <div class="modal-footer">
+                @if (ViewData["AlertDialogYesNoLinkYes"] == null)
+                {
+                    <a id="alertDialogYesNoIdYes" href="#" class="btn btn-default" data-dismiss="modal">Sim</a>
+                }
+                else
+                {
+                    <a id="alertDialogYesNoIdYes" href="@ViewData["AlertDialogYesNoLinkYes"]" class="btn btn-default">Sim</a>
+                }
+
+
+                @if (ViewData["AlertDialogYesNoLinkNo"] == null)
+                {
+                    <a id="alertDialogYesNoIdNo" href="#" class="btn btn-default" data-dismiss="modal">Não</a>
+                }
+                else
+                {
+                    <a id="alertDialogYesNoIdNo" href="@ViewData["AlertDialogYesNoLinkNo"]" class="btn btn-default">Não</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>*@

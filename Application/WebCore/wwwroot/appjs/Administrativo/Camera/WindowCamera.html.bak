@@ -1,0 +1,19 @@
+﻿<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-header-titulo">Foto</h4>
+            </div>
+            <div class="modal-body center-block">
+                <video autoplay="true" id="videoWebCam" style="width:400px">
+                </video>
+            </div>
+            <div class="modal-footer">
+                <button btn-take-snapshot title="Clique aqui para tirar a foto" type="button" class="btn btn-success escondido"><i class="fa fa-thumbs-up"></i> Foto</button>
+                <a href="#" class="btn btn-primary" data-dismiss="modal">Cancelar</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

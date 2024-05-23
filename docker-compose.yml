@@ -1,0 +1,17 @@
+version: '3.4'
+name: main-service-ddd
+services:
+
+  mainserviceapi:
+    image: ${DOCKER_REGISTRY-}mainserviceapi
+    build:
+      context: .
+      dockerfile:  Application/MainServiceAPI/Dockerfile
+
+
+  webcore:
+    image: ${DOCKER_REGISTRY-}webcore
+    build:
+      context: .
+      dockerfile: Application/WebCore/Dockerfile
+

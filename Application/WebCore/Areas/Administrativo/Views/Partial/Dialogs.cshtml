@@ -1,0 +1,25 @@
+﻿
+<div id="dialogsContainer">
+    @if (ViewData["AlertDialogErroRedirectText"] != null)
+    {
+        @await Html.PartialAsync("~/Views/Partial/AlertDialogErroRedirectView.cshtml")
+    }
+
+    @if (ViewData["AlertDialogErroText"] != null)
+    {
+        @await Html.PartialAsync("~/Views/Partial/AlertDialogErroView.cshtml")
+    }
+
+    @if (ViewData["AlertDialogOKRedirectText"] != null)
+    {
+        @await Html.PartialAsync("~/Views/Partial/AlertDialogOKRedirectView.cshtml")
+    }
+
+    @if (ViewData["AlertDialogOKText"] != null)
+    {
+        @await Html.PartialAsync("~/Views/Partial/AlertDialogOKView.cshtml")
+    }
+
+    @await Html.PartialAsync("~/Views/Partial/DialogVisualizadorDeImagensView.cshtml")
+
+</div>

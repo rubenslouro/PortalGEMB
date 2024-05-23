@@ -1,0 +1,201 @@
+﻿@model Domain.Dtos.TipoUsuario.Visualizar.Output.TipoUsuarioVisualizarOutModel
+@{
+    ViewBag.Title = "Configurações de tipo de usuário";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+@Html.HiddenFor(h => h.Codigo, new { id = "hiddenCodTipoUsuario" })
+<div class="row">
+    <div class="col-lg-12 top-bar">
+        <a title="Clique aqui para ser direcionado a listagem de tipos de usuário" class="btn btn-primary pull-right" href="@Url.Action("Index", "TipoUsuario")"><i class="fa fa-th-list"></i> Tipos de usuário</a>
+        <a title="Clique aqui para editar este tipo de usuário" class="btn btn-primary pull-right" href="@Url.Action("Editar", "TipoUsuario", new {Area = "Administrativo", codTipoUsuario = Model.Codigo})"><i class="fa fa-edit"></i> Editar</a>
+    </div>
+</div>
+<fieldset>
+    <legend>Informações do tipo de usuário</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Codigo, null, new { @class = "control-label" })
+                <p>@Html.DisplayFor(x => x.Codigo)</p>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Descricao, null, new { @class = "control-label" })
+                <p id="displayTipoUsuarioDescricao">@Html.DisplayFor(x => x.Descricao)</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row">
+                <div class="col-lg-12 top-bar">
+                    <label for="tableUsuariosVinculados" class="control-label">Usuários vinculados</label>
+                    <button title="Clique aqui para ajustar todos os usuários com customizações para se adequarem ao perfil do tipo de usuário."
+                            data-btnForcaAjuste type="button"
+                            class="btn btn-primary pull-right escondido">
+                        Forçar ajuste de usuários ao perfil
+                    </button>
+                </div>
+            </div>
+            <table id="tableUsuariosVinculados"
+                   class="table table-striped table-bordered table-hover"
+                   width="100%"
+                   data-table="true"
+                   data-filtro="false"
+                   data-coluna-class-0="text-right"
+                   data-ordenar-colunas="false"
+                   data-total-page="10">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </div>
+        <div class="col-lg-6 escondido" id="displayAvisoAjusteAutomatico">
+            <div class="alert alert-warning">
+                <p>
+                    Caso deseje forçar todos os usuários do tipo <b>@Model.Descricao</b> que tenham permissões customizadas a se ajustarem ao perfil
+                    atual do tipo de usuário perdendo as customizações, clique no botão <b>Forçar ajuste de usuários ao perfil</b>.
+                </p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset>
+    <legend>Perfil de acesso</legend>
+    <div class="row escondido" id="displayAvisoTipoEmProducao">
+        <div class="col-lg-12">
+            <div class="alert alert-warning">
+                <p><b>Aviso</b><br /></p>
+                <p>
+                    Ao alterar um perfil de tipo de usuário, <b>todos os usuários</b> que sejam do tipo <b>@Model.Descricao</b> serão
+                    <b>redefinidos</b> para as novas configurações do perfil. Com isso todas as permissões customizadas para os usuários do tipo
+                    de usuário <b>@Html.DisplayFor(x => x.Descricao)</b> serão removidas. Caso você selecione a opção <b>
+                        Não aplique esta alteração para
+                        os usuários ativos do tipo de usuário @Model.Descricao
+                    </b>, esta
+                    alteração não será aplicada nos usuários que estão ativos neste tipo de usuário.
+                    A <b>desvantagem</b> de não aplicar as alterações é que todos os usuários ativos do tipo <b>@Model.Descricao</b> provavelmente
+                    estarão com permissões customizadas o que pode dificultar sua gestão.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @if (ViewData["UsuarioMesmoTipo"] != null && (bool)ViewData["UsuarioMesmoTipo"])
+        {
+            <div class="col-lg-12">
+                <div class="alert alert-danger">
+                    <p><b>Atenção</b></p>
+                    <p>
+                        Muito cuidado ao gerenciar este perfil de tipo de usuário, <b>ele é o seu tipo de usuário</b>. Caso remova alguma permissão
+                        relacionada a <b>tipo de usuário</b>, seu acesso sobre a
+                        <b>
+                            permissão de usuários
+                        </b>
+                        pode ser prejudicado e você somente poderá receber a permissão novamente se solicitar a um
+                        usuário que possa atribuí-la ou através do suporte técnico.
+                    </p>
+                    <p>
+                        Verifique também se na atribuição da permissão de seu usuário para <b>Tipo de Usuário</b> foi realizada de forma customizada.
+                        Caso sim e a opção <b>Não aplique esta alteração para os usuários ativos do tipo de usuário</b> não esteja marcada, será necessário que antes de qualquer 
+                        alteração neste tipo de usuário realizada por você, adicione a permissão <b>Tipo de Usuário</b>.
+                        Caso contrário ao atribuir uma permissão qualquer para seu tipo de usuario, o sistema removerá suas permissões no enquadramento 
+                        de tipo de usuários e não devolverá, já que foi obtida de forma customizada.
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row" id="areaChkAplicarRegraRetroativa" start-hide="true">
+        <div class="col-lg-12">
+            <p><input type="checkbox" id="chkAplicarRegraRetroativa" /> <b>Não aplique esta alteração para os usuários ativos do tipo de usuário @Model.Descricao</b> </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Perfil de acesso -  Permissões disponíveis
+                </div>
+                <div class="panel-body backgroud-permissoes-body ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtPesquisaPermissaoInativa" placeholder="Busca ...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btnPesquisarPermissaoInativa" title="Clique aqui para buscar a permissão desejada" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnLimparPermissaoInativa" title="Limpar caixa de pesquisa" type="button">
+                                        <i class="fa fa-eraser "></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnAdicionarTodasPermissoes" title="Adicionar todas as permissões" type="button">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="height: 250px; overflow: auto">
+                        <div class="col-lg-12" id="regrasNaoAtribuidasArea">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Perfil de acesso - Permissões atribuídas
+                </div>
+                <div class="panel-body backgroud-permissoes-body ">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtPesquisaPermissaoAtiva" placeholder="Busca ...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" id="btnPesquisarPermissaoAtiva" title="Clique aqui para buscar a permissão desejada" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnLimparPermissaoAtiva" title="Limpar caixa de pesquisa" type="button">
+                                        <i class="fa fa-eraser"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="btnRemoverTodasPermissoes" title="Remover todas as permissões" type="button">
+                                        <i class="fa fa-minus-circle"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="height: 250px; overflow: auto">
+                        <div class="col-lg-12" id="regrasAtribuidasArea">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+@if (Model.PermiteLog)
+{
+    @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/Logs.cshtml", Model.Log)
+}
+
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/TipoUsuario/ConfiguracoesPage.js"></script>
+}
+
+
+

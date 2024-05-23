@@ -1,0 +1,78 @@
+﻿@using System.Web
+@model Domain.Dtos.TurmaAluno.Input.TurmaAlunoAdicionarInModel
+@{
+    ViewData["Title"] = "Cadastro de Alunos por Turma";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "TurmaAluno", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(o => o.IDUsuarioCadastro)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de cadastro de atendimento" class="btn btn-primary pull-right" href="@Url.Action("Index", "TurmaAluno", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Dados de Idenficação</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TuAl_ID_Turma, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TuAl_ID_Turma, (IEnumerable<SelectListItem>)ViewData["Turma"], string.Empty, new { @class = "form-control", id = "ddlTurma" })
+                    @Html.ValidationMessageFor(x => x.TuAl_ID_Turma, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            @*
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TuAl_ID_Assistido, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TuAl_ID_Assistido, (IEnumerable<SelectListItem>)ViewData["Assistido"], string.Empty, new { @class = "form-control", id = "ddlAssistido" })
+                    @Html.ValidationMessageFor(x => x.TuAl_ID_Assistido, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TuAl_CD_PeriodoLetivo, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TuAl_CD_PeriodoLetivo, (IEnumerable<SelectListItem>)ViewData["PeriodoLetivo"], string.Empty, new { @class = "form-control", id = "ddlPeriodoLetivo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.TuAl_NR_AnoLetivo, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.TuAl_NR_AnoLetivo, (IEnumerable<SelectListItem>)ViewData["AnoLetivo"], string.Empty, new { @class = "form-control", id = "ddlAnoLetivo" })
+                </div>
+            </div>
+            *@
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.ChechBoxList, null, new { @class = "control-label" })<br />
+                    @for (int i = 0; i < Model.ChechBoxList.Count; i++)
+                    {
+                        @Html.CheckBoxFor(m => Model.ChechBoxList[i].IsChecked, new { id = "Chk-" + i, @class = "display: inline-block; width: 100px;" })
+                        @Html.LabelFor(m => Model.ChechBoxList[i].IsChecked, Model.ChechBoxList[i].Text, new { @for = "Chk-" + i, @class = "display: inline-block; width: 100px; background-color: red;" })
+                        @Html.HiddenFor(m => Model.ChechBoxList[i].Text)
+                        @Html.HiddenFor(m => Model.ChechBoxList[i].Value)
+                        <br />
+                    }
+                </div>
+                <br />
+            </div>
+        </div>
+
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar a turma \ aluno"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+

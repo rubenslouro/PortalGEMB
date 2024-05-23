@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["SiteName"] = "Portal GEMB";
+}
+<!doctype html>
+<html lang="pt-BR">
+@await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/LayoutHead.cshtml")
+<body class="image-forced-background-extra">
+    <div class="loader" style="margin: 80vh auto 0 auto" id="no-wrapper"></div>
+    <div id="wrapper" class="escondido">
+        @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/LayoutMenu.cshtml")
+        <div class="main-wrapper">
+            <div id="page-wrapper">
+                <div class="row" id="pageContent">
+                    <div class="col-lg-12">
+                        <h2>@ViewData["Title"]</h2>
+                    </div>
+                    <div class="col-lg-12 corpo-aplicacao">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <div class="areacliente dropup">
+                @*
+                <div>
+                <button class="btn-link btn-primary pull-left lateral-bar-btn btn-circle" title="Adicionar nova visita" id="btnGlobalAddVisita">
+                <i class="fa fa-plus-circle"></i>
+                </button>
+                <button class="btn-link btn-primary pull-left lateral-bar-btn btn-circle"  title="Listar pessoas" id="btnGlobalListarPessoas">
+                <i class="fa fa-list"></i>
+                </button>
+                </div>
+                *@
+                <em data-data-hora-rodape-aplicativo class="data-hora-rodpe"></em>
+            </div>
+        </div>
+    </div>
+    <div id="areaQrCodeUrlPage" class="escondido"></div>
+    @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/Dialogs.cshtml")
+    @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/Scripts.cshtml")
+
+    @await RenderSectionAsync("scripts", required: false)
+</body>
+</html>

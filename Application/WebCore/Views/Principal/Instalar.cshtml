@@ -1,0 +1,101 @@
+﻿@using System.Web
+@model Domain.Dtos.ConfiguracaoGeral.Input.ConfiguracaoGeralConfigurarBancoDadosECriaInModel
+@{
+    ViewData["Title"] = "Portal GEMB - Guia de instalação";
+    Layout = "~/Views/Shared/_LayoutLimpo.cshtml";
+}
+
+@using (Html.BeginForm("Instalar", "Principal", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="backgroung-install">
+        <div class="panel panel-primary panel-rounded">
+            <div class="panel-heading">
+                @ViewData["Title"] <i class="fa fa-database pull-right"></i>
+            </div>
+            <div class="panel-body backgroud-permissoes-body ">
+                <fieldset>
+                    <legend>Passo 1 de 2 <img id="calangoImg" class="img-responsive center-block transparencia-leve metade-tamanho img-logo-login" src="~/appimages/logo.png" title="Portal GEMB" alt="Portal GEMB" /></legend>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-info">
+                                <p><b>Bem vindo assistente de instalação do Portal GEMB</b></p>
+                                <p>Ficamos felizes por você escolher o <b>Portal GEMB</b> <i class="fa fa-heart"></i>.</p>
+                                <p>Em apenas 2 passos você conseguirá realizar a nossa complexa instalação <i class="fa fa-smile-o"></i>.</p>
+                                <p>Recomandamos que você <b>leia atentamente</b> as informações abaixo para que não haja dificuldades em sua instalação.</p>
+                                <p>
+                                    Para efetuar a instalação, será necessário informar os parâmetros de conexão com o banco de dados. Caso o banco de dados <b>já exista</b>, o usuário informado deve
+                                    ter <b>acesso completo</b> ao banco de dados (consulta, leitura e escrita). Caso o banco de dados ainda <b>não exista</b>, não se preocupe, nós <b>criaremos ele</b> para você.
+                                    Porém, para isso será necessário que além das permissões mencionadas acima, o usuário também possa <b>criar um novo banco de dados</b>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <fieldset>
+                            <legend>Banco de Dados </legend>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.Server, null, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.Server, new { @class = "form-control text-lowercase", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.Server)) })
+                                        @Html.ValidationMessageFor(x => x.Server, null, new { @class = "alerta-campo" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.ServerPort, null, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.ServerPort, new { @class = "form-control text-right", mask = "PortaTCP", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.ServerPort)) })
+                                        @Html.ValidationMessageFor(x => x.ServerPort, null, new { @class = "alerta-campo" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.UserId, null, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.UserId, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.UserId)) })
+                                        @Html.ValidationMessageFor(x => x.UserId, null, new { @class = "alerta-campo" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.Password, null, new { @class = "control-label" })
+                                        @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.Password)) })
+                                        @Html.ValidationMessageFor(x => x.Password, null, new { @class = "alerta-campo" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(x => x.DataBaseName, null, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.DataBaseName, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.DataBaseName)) })
+                                        @Html.ValidationMessageFor(x => x.DataBaseName, null, new { @class = "alerta-campo" })
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button id="subm" type="submit" class="btn btn-success " title="Clique aqui para salvar a configuração do banco de dados e seguir para o passo 2">Continuar </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+

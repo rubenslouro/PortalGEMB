@@ -1,0 +1,83 @@
+﻿@using System.Web
+@using UtilService
+@using UtilService.Util
+@model Domain.Entities.PresencaAluno
+@{
+    ViewData["Title"] = "Lançar Presença do Aluno";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "Presenca", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(o => o.IDUsuarioCadastro)
+    @* <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div> *@
+    <fieldset>
+        <legend> </legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.PrAl_ID_Turma, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.PrAl_ID_Turma, (IEnumerable<SelectListItem>)ViewData["Turma"], string.Empty, new { @class = "form-control", id = "ddlTurma" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table id="tbAlunos" class="table table-hover" width="100%" data-table="true">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px">Código</th>
+                            <th>Nome do Aluno</th>
+                            <th>Presença</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ListaAssistido == null) { }
+                        else
+                        {
+                            @foreach (var obj in Model.ListaAssistido)
+                            {
+                                <tr>
+                                    <td style="width: 50px">@obj.Assi_ID_Assistido</td>
+                                    <td>
+                                        @obj.Assi_NM_Nome
+                                        <br />
+                                        @* @obj.Assi_NR_CPF.ToFormatedCpfCnpjString() *@
+                                    </td>
+                                    <td>@* @obj.Assi_DT_Nascimento.ToShortDateString() *@</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Visualizar", "Assistido", new {Area = "Administrativo", codAssistido = obj.Assi_ID_Assistido})" title="Visualizar"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "Assistido", new {Area = "Administrativo", codAssistido = obj.Assi_ID_Assistido})" title="Editar"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-info" href="@Url.Action("Adicionar", "Atendimento", new {Area = "Administrativo", codAssistido = obj.Assi_ID_Assistido})" title="Lançar Atendimento"><i class="fa fa-user-plus"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td colspan="5">&nbsp;</td>
+                        </tr>
+                    </thead>
+                    <tfoot></tfoot>
+                </table>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar uma nova presença"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/Presenca/Page.js"></script>
+}

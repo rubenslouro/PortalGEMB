@@ -1,0 +1,74 @@
+﻿@using WebCore.DTO.LoginWeb.Output;
+@model Domain.Dtos.Usuario.AlterarSenha.Input.UsuarioAlterarSenhaInModel
+@{
+    ViewData["Title"] = "Alterar senha";
+    ViewData["Caption"] = "Alterando sua senha";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+    var usuario = (LoginOutModel)ViewData["usuario"];
+}
+@using (Html.BeginForm("AlterarSenha", "Principal", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.CodUsuario)
+    <div class="row">
+        <div class="col-lg-12 top-bar">
+                <a title="Clique aqui e seja direcionado a página principal de seu perfil" class="btn btn-primary pull-right" href="@Url.Action("Index", "Principal")"><i class="fa fa-home"></i> Principal</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Informações do usuário</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Usuário</label>
+                    <p>@usuario?.Codigo - @usuario?.Nome</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Email</label>
+                    <p>@usuario?.Email</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.SenhaAntiga, null, new { @class = "control-label" })
+                    @Html.PasswordFor(x => x.SenhaAntiga, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.SenhaAntiga) })
+                    @Html.ValidationMessageFor(x => x.SenhaAntiga, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.SenhaNova, null, new { @class = "control-label" })
+                    @Html.PasswordFor(x => x.SenhaNova, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.SenhaNova) })
+                    @Html.ValidationMessageFor(x => x.SenhaNova, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.SenhaNovaConfirmacao, null, new { @class = "control-label" })
+                    @Html.PasswordFor(x => x.SenhaNovaConfirmacao, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.SenhaAntiga) })
+                    @Html.ValidationMessageFor(x => x.SenhaNovaConfirmacao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button id="subm" type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar a alteração de sua senha">Salvar <i class="fa fa-check"></i></button>
+        </div>
+    </div>
+}
+

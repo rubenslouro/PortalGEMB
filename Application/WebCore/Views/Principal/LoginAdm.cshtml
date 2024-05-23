@@ -1,0 +1,49 @@
+﻿@model WebCore.DTO.LoginWeb.Input.LoginInModel
+
+@{
+    ViewData["Title"] = "Entrada";
+    Layout = "~/Views/Shared/_LayoutLimpo.cshtml";
+}
+<form asp-controller="Principal" asp-action="LoginAdm" method="post" data-show-auto-processing-popup="false">
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-lg-12">
+            <img id="ImageCliente" class="img-responsive center-block" src="~/appimages/logo-login.png" title="Portal GEMB" alt="Portal GEMB" />
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 escondido" id="panelLogin">
+            <div class="panel panel-primary panel-no-border panel-rounded sombra-basica">
+                <div class="panel-body">
+                    <div class="form-group ">
+                        <div class="input-group">
+                            <span class="input-group-addon">@@</span>@Html.TextBoxFor(x => x.Email, new { @class = "form-control text-lowercase", placeholder = Html.DisplayNameFor(x => x.Email) })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.Email, null, new { @class = "alerta-campo-login" })
+                    </div>
+                    <div class="form-group">
+                        @Html.PasswordFor(x => x.Senha, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Senha) })
+                        @Html.ValidationMessageFor(x => x.Senha, null, new { @class = "alerta-campo-login" })
+                    </div>
+                    <div class="form-group">
+                        @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true", id = "validationSumary" })
+                        <button id="subm" type="submit" class="btn btn-block btn-success" title="Clique aqui logar">Entrar <i class="fa fa-key"></i></button>
+                    </div>
+                    <div class="form-group">
+                        @Html.ActionLink("Esqueceu a senha?", "LembrarSenha", "Principal", new { @class = "btn btn-danger pull-right", title = "Clique aqui para ser direcionado a área de recuperação de senha." })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="module" src="~/appjs/Principal/LoginAdm/LoginAdmPage.js"></script>
+}
+
+
+
+
+

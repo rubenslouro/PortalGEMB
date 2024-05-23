@@ -1,0 +1,87 @@
+﻿@using System.Web
+@model Domain.Dtos.Turma.Input.TurmaAdicionarInModel
+@{
+    ViewData["Title"] = "Cadastro de Turma";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "Turma", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(o => o.IDUsuarioCadastro)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de cadastro de atendimento" class="btn btn-primary pull-right" href="@Url.Action("Index", "Turma", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Dados de Idenficação</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_ID_Disciplina, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.Turm_ID_Disciplina, (IEnumerable<SelectListItem>)ViewData["Disciplina"], string.Empty, new { @class = "form-control", id = "ddlDisciplina" })
+                    @Html.ValidationMessageFor(x => x.Turm_ID_Disciplina, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_TX_Descricao, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Turm_TX_Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Turm_TX_Descricao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_DT_Inicio, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Turm_DT_Inicio, new { @class = "form-control", mask = "data", ApenasLetras = true, runat = "server", id = "txtDtInicio" })
+                    @Html.ValidationMessageFor(x => x.Turm_DT_Inicio, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_DT_Final, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Turm_DT_Final, new { @class = "form-control", mask = "data", ApenasLetras = true, runat = "server", id = "txtDtFinal" })
+                    @Html.ValidationMessageFor(x => x.Turm_DT_Final, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_CD_PeriodoLetivo, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.Turm_CD_PeriodoLetivo, (IEnumerable<SelectListItem>)ViewData["PeriodoLetivo"], string.Empty, new { @class = "form-control", id = "ddlPeriodoLetivo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Turm_NR_AnoLetivo, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.Turm_NR_AnoLetivo, (IEnumerable<SelectListItem>)ViewData["AnoLetivo"], string.Empty, new { @class = "form-control", id = "ddlAnoLetivo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Informações Extras</legend>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="control-label" asp-for="Turm_TX_Observacao">Observações</label>
+                    @Html.TextAreaFor(x => x.Turm_TX_Observacao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Turm_TX_Observacao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar o atendimento"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+

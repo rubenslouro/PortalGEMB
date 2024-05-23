@@ -1,0 +1,26 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "AllowedHosts": "*",
+  "CryptoKey": "visitatonKey123",
+  "SqlServer": {
+    "ConnectionString": "Server=BINHO-ACER\\SQLEXPRESS;Database=GrupoEspirita2;User Id=sa;Password=developer1234;TrustServerCertificate=True"
+  },
+  "LoginConfig": {
+    "TimeInMinutesForTokenDuration": 10080
+  },
+  "NotificationMicroservice": {
+    "FromEmail": "",
+    "Smtp": "smtp-mail.outlook.com",
+    "Port": "587",
+    "User": "",
+    "Password": "",
+    "UseSSL": "true",
+    "LogSendErrosInFile": "true"
+  }
+}

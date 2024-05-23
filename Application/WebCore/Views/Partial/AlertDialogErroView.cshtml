@@ -1,0 +1,25 @@
+﻿<div class="modal fade" data-alertDialogErro tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><i class="fa fa-warning vermelho"></i> Problemas!</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-8" data-alertDialogErroMensagemContent>
+                        @ViewData["AlertDialogErroText"]
+                    </div>                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+Refazer as view de redirect antes de tudo antes do errview pq
+nao poderia ser assim alertDialogOKRedirectView tem que ser a mensagem, isso é sosno
+ alertDialogOKRedirectView = $("[data-alertDialogOKRedirect]").first();
+            let selectorPopUpMsg = alertDialogOKRedirectView.text().trim();
+            if (selectorPopUpMsg.length !== 0) {

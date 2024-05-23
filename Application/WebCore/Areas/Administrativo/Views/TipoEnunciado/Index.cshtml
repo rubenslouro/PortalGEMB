@@ -1,0 +1,265 @@
+﻿@using UtilService
+@using UtilService.Util
+@model Domain.Entities.TipoEnunciado
+@{
+    ViewData["Title"] = "Lista dos Tipos dos Enunciados";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#atendimento" data-toggle="tab">Atendimento</a></li>
+        <li><a href="#atividaderemunerada" data-toggle="tab">Atividade Remunerada</a></li>
+        <li><a href="#dependente" data-toggle="tab">Dependente</a></li>
+        <li><a href="#escolaridade" data-toggle="tab">Escolaridade</a></li>
+        <li><a href="#estadocivil" data-toggle="tab">Estado Civil</a></li>
+        <li><a href="#moradia" data-toggle="tab">Moradia</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="active tab-pane" id="atendimento">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Atendimento</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de atendimento" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoAtendimento", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoAtendimento)
+                            {
+                                <tr>
+                                    <td>@obj.TpAt_ID_TipoAtendimento</td>
+                                    <td>@obj.TpAt_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoAtendimento", new {Area = "Administrativo", codTipoAtendimento = obj.TpAt_ID_TipoAtendimento})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="atividaderemunerada">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Atividade Remunerada</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de atividade remunerada" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoAtividadeRemunerada", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoAtividadeRemunerada)
+                            {
+                                <tr>
+                                    <td>@obj.TpAR_ID_TipoAtividadeRemunerada</td>
+                                    <td>@obj.TpAR_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoAtividadeRemunerada", new {Area = "Administrativo", codTipoAtividadeRemunerada = obj.TpAR_ID_TipoAtividadeRemunerada})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="dependente">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Dependentes</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de dependente" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoDependente", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoDependente)
+                            {
+                                <tr>
+                                    <td>@obj.TpDe_ID_TipoDependente</td>
+                                    <td>@obj.TpDe_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoDependente", new {Area = "Administrativo", codTipoDependente = obj.TpDe_ID_TipoDependente})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="escolaridade">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Escolaridade</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de escolaridade" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoEscolaridade", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoEscolaridade)
+                            {
+                                <tr>
+                                    <td>@obj.TpEs_ID_TipoEscolaridade</td>
+                                    <td>@obj.TpEs_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoEscolaridade", new {Area = "Administrativo", codTipoEscolaridade = obj.TpEs_ID_TipoEscolaridade})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="estadocivil">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Estado Civil</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de estado civil" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoEstadoCivil", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoEstadoCivil)
+                            {
+                                <tr>
+                                    <td>@obj.TpEC_ID_TipoEstadoCivil</td>
+                                    <td>@obj.TpEC_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoEstadoCivil", new {Area = "Administrativo", codTipoEstadoCivil = obj.TpEC_ID_TipoEstadoCivil})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="moradia">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    <p class="titulo-formulario">Lista de Moradia</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6 top-bar">
+                    @* <a title="Clique aqui para adicionar um novo tipo de moradia" class="btn btn-primary pull-right" href="@Url.Action("Adicionar", "TipoMoradia", new {Area = "Administrativo"})"><i class="fa fa-plus-circle"></i> Adicionar</a> *@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover" width="100%" data-table="true">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model.TipoMoradia)
+                            {
+                                <tr>
+                                    <td>@obj.TpMo_ID_TipoMoradia</td>
+                                    <td>@obj.TpMo_NM_Descricao</td>
+                                    <td>
+                                        <a class="btn btn-info" href="@Url.Action("Editar", "TipoMoradia", new {Area = "Administrativo", codTipoMoradia = obj.TpMo_ID_TipoMoradia})" title="Editar"><i class="fa fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <td colspan="3">&nbsp;</td>
+                            </tr>
+                        </thead>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

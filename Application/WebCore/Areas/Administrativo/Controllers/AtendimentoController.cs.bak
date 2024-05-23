@@ -1,0 +1,21 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using WebCore.Areas.AreaManager;
+
+namespace WebCore.Areas.Administrativo.Controllers;
+
+/// <inheritdoc />
+[CheckNivelPermissao]
+[Area("Administrativo")]
+public class AtendimentoController : Controller
+{
+    public IActionResult Historico()
+    {
+        return View();
+    }
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+}
+

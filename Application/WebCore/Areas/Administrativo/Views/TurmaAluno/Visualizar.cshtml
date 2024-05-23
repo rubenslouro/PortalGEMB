@@ -1,0 +1,54 @@
+﻿@using UtilService
+@using UtilService.Util
+@model Domain.Entities.TurmaAlunoIndex
+@{
+    ViewData["Title"] = "Visualizar Aluno \\ Turma";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12 top-bar">
+        <a title="Clique aqui para ser direcionado a listagem de cadastro de turmas" class="btn btn-primary pull-right" href="@Url.Action("Index", "TurmaAluno", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+    </div>
+</div>
+<fieldset>
+    <legend>Dados de Idenficação</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(x => x.TuAl_NM_Turma, null, new { @class = "control-label" })
+                <p>@Model.TuAl_NM_Turma</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                @Html.LabelFor(x => x.TuAl_NM_Assistido, null, new { @class = "control-label" })
+                <p>@Model.TuAl_NM_Assistido</p>
+            </div>
+        </div>
+    </div>
+    @* 
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(x => x.TuAl_CD_PeriodoLetivo, null, new { @class = "control-label" })
+                <p>@Model.TuAl_CD_PeriodoLetivo</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-2">
+            <div class="form-group">
+                @Html.LabelFor(x => x.TuAl_NR_AnoLetivo, null, new { @class = "control-label" })
+                <p>@Model.TuAl_NR_AnoLetivo</p>
+            </div>
+        </div>
+    </div> 
+    *@
+</fieldset>
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/turmaaluno/PageVisualizar.js"></script>
+}

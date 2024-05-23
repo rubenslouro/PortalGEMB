@@ -1,0 +1,155 @@
+﻿@using UtilService
+@using UtilService.Util
+@model Domain.Entities.Assistido_Visualizar
+@{
+    ViewData["Title"] = "Visualizar Assistido";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12 top-bar">
+        <a title="Clique aqui para ser direcionado a listagem de cadastro de assistidos" class="btn btn-primary pull-right" href="@Url.Action("Index", "Assistido", new { Area = "Administrativo" })"><i class="fa fa-th-list"></i> Listar</a>
+        <a title="Clique aqui para ser direcionado a edição de cadastro de assistidos" class="btn btn-primary pull-right" href="@Url.Action("Editar", "Assistido", new { Area = "Administrativo", codAssistido = Model.Assi_ID_Assistido })"><i class="fa fa-edit"></i> Editar</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+    </div>
+</div>
+<fieldset>
+    <legend>Identificação</legend>
+    <div class="row">
+        @* <div class="col-xs-6 col-sm-3 col-md-1">
+            <div class="form-group">
+                <label asp-for="Assi_ID_Assistido">Código</label>
+                <p>@Model.Assi_ID_Assistido</p>
+            </div>
+        </div> *@
+        <div class="col-xs-6 col-sm-3 col-md-3">
+            <div class="form-group">
+                <img class="foto-cliente" id="imgDocumento" data-visualizador-imagem />
+                @Html.HiddenFor(x => x.Assi_MM_Imagem, new { id = "txtImagemDocumento" })
+                @Html.ValidationMessageFor(x => x.Assi_MM_Imagem, null, new { @class = "alerta-campo" })
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-9 col-md-9">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    @Html.LabelFor(x => x.Assi_NM_Nome, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NM_Nome</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_CD_Sexo, null, new { @class = "control-label" })
+                    <p>@Model.Assi_CD_Sexo</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_DT_Nascimento, null, new { @class = "control-label" })
+                    <p>@Model.Assi_DT_Nascimento</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_NR_Idade, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NR_Idade</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_NR_RG, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NR_RG</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_NR_CPF, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NR_CPF</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_NR_Telefone, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NR_Telefone.ToFormatedPhoneString()</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                    @Html.LabelFor(x => x.Assi_NM_Mae, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NM_Mae</p>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-8">
+                    @Html.LabelFor(x => x.Assi_NM_Endereco, null, new { @class = "control-label" })
+                    <p>@Model.Assi_NM_Endereco</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Dados de Referência</legend>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_NM_Profissao, null, new { @class = "control-label" })
+                <p>@Model.Assi_NM_Profissao</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_TX_Moradia, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_Moradia</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_TX_Escolaridade, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_Escolaridade</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_TX_EstadoCivil, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_EstadoCivil</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_CD_DeficienteFisico, null, new { @class = "control-label" })
+                <p>@Model.Assi_CD_DeficienteFisico</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_CD_DeficienteMental, null, new { @class = "control-label" })
+                <p>@Model.Assi_CD_DeficienteMental</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_TX_Dependente, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_Dependente</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_CD_ImpossibilidadeTrabalho, null, new { @class = "control-label" })
+                <p>@Model.Assi_CD_ImpossibilidadeTrabalho</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_TX_AtividadeRemunerada, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_AtividadeRemunerada</p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_CD_Score, null, new { @class = "control-label" })
+                <p>@Model.Assi_CD_Score</p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4">
+                @Html.LabelFor(x => x.Assi_NR_Score, null, new { @class = "control-label" })
+                <p>@Model.Assi_NR_Score</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Informações Extras</legend>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                @Html.LabelFor(x => x.Assi_TX_Observacao, null, new { @class = "control-label" })
+                <p>@Model.Assi_TX_Observacao</p>
+            </div>
+        </div>
+    </div>
+</fieldset>
+@section Scripts
+{
+    <script type="module" src="~/appjs/Administrativo/Assistido/PageVisualizar.js"></script>
+}

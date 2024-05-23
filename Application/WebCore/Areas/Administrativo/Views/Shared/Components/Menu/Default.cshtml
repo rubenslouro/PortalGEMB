@@ -1,0 +1,144 @@
+﻿@{
+    //var logo =   "?" + DateTime.UtcNow.Millisecond;
+}
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <!-- Top Toolbar -->
+    <div class="col-sm-12 navbar-top-default nav-layout">
+	    <div class="navbar-header">
+	        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	        </button>
+	        <img id="ImgPrincipal" height="50px" src="~/appimages/logo-sistema-branco.webp" title="Portal GEMB" alt="Portal GEMB" />
+	    </div>
+
+		<ul class="nav navbar-top-links navbar-right">
+		    <li class="dropdown">
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+		            <i class="fa fa-user fa-fw"></i>
+		            <b></b>
+		            <i class="fa fa-caret-down"></i>
+		        </a>
+		        <ul class="dropdown-menu">
+		            @await Html.PartialAsync("~/Areas/Administrativo/Views/Partial/AlterarSenhaMenuItem.cshtml")
+		            <li>
+		                <a href="@Url.Action("LogOut", "Principal", new {Area = string.Empty})"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
+		            </li>
+		        </ul>
+		    </li>
+		</ul>
+	</div>
+	<!-- /Top Toolbar -->
+    <div class="navbar-default sidebar " role="navigation">
+        <div class="sidebar-nav collapse navbar-collapse" aria-expanded="false">
+            <ul class="nav" id="side-menu">
+                <li>
+                    <a href="@Url.Action("Index", "Principal")" class="sidebar-principal"><i class="fa fa-home fa-fw"></i> Principal</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sign-in fa-fw"></i> Cadastro<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="@Url.Action("Index", "Assistido", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Assistidos</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Atendimento", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Atendimento</a>
+                        </li>
+                        @if ((bool)ViewBag.CadastroUsuario)
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Usuario", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Usuário</a>
+                            </li>
+                        }
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sign-in fa-fw"></i> Lançamento<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="@Url.Action("Adicionar", "Presenca", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Presença</a>
+                        </li>
+                        @*
+                        <li>
+                            <a href="@Url.Action("Adicionar", "TurmaAluno", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Aluno \ Turma</a>
+                        </li>
+                        *@
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sign-in fa-fw"></i> Consulta<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="@Url.Action("Index", "Presenca", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Presença</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "TurmaAluno", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Aluno \ Turma</a>
+                        </li>
+                        @*
+                        <li>
+                            <a href="@Url.Action("Historico", "Atendimento", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Histórico de Atendimento</a>
+                        </li>
+                        *@
+                    </ul>
+                </li>
+                @* }
+                @if ((bool)ViewBag.CadastroUsuario)
+                {
+                <li>
+                    <a href="#"><i class="fa fa-users fa-fw"></i> Cadastro de usuários<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="@Url.Action("Index", "Usuario", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Listagem</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Adicionar", "Usuario", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Novo usuário</a>
+                        </li>
+                    </ul>
+                </li>
+                }
+                @if ((bool)ViewBag.CadastroTipoUsuario)
+                {
+                    <li>
+                        <a href="#"><i class="fa fa-user fa-fw"></i> Cadastro de tipos de usuários<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index", "TipoUsuario", new { Area = "Administrativo" })"><i class="fa fa-th-list fa-fw"></i> Listagem</a>
+                            </li>
+                        </ul>
+                    </li>
+                } 
+                *@
+                @if ((bool)ViewBag.ConfiguracaoGeral)
+                {
+                    <li>
+                        <a href="#"><i class="fa fa-gears fa-fw"></i> Configuração<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index", "ConfiguracaoGeral", new {Area = "Administrativo"})"><i class="fa fa-gear fa-fw"></i> Configuração geral</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Turma", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Turma \ Disciplina</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "TipoEnunciado", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Tipo de Enunciado</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "TipoUsuario", new { Area = "Administrativo" })"><i class="fa fa-plus-circle fa-fw"></i> Tipo de Usuário</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                <li>
+                    <a href="#"><i class="fa fa-qrcode fa-fw"></i> QR Code<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#" id="btnShowQRCodePage"><i class="fa fa-link fa-fw"></i> QR Code da página</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

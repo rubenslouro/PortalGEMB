@@ -1,0 +1,85 @@
+﻿@using System.Web
+@model Domain.Dtos.Usuario.Criar.Input.UsuarioAdicionarInModel
+@{
+    ViewData["Title"] = "Novo usuário";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "Usuario", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(o => o.CodUsuarioCadastro)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de usuários" class="btn btn-primary pull-right" href="@Url.Action("Index", "Usuario", new {Area = "Administrativo"})"><i class="fa fa-th-list"></i> Usuários</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Nível de acesso</legend>
+        <div class="row">
+            <div class="col-xs-12  col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.CodTipoUsuario, null, new { @class = "control-label" })
+                    @Html.DropDownListFor(x => x.CodTipoUsuario, (IEnumerable<SelectListItem>)ViewData["TipoUsuario"], string.Empty, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.CodTipoUsuario, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Login</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Email, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control text-lowercase", id = "txtEmail", 
+                        autopesquisa = Url.Action("PesquisaUsuarioEmail", "Usuario"),placeholder = Html.DisplayNameFor(x => x.Email)})
+                    @Html.ValidationMessageFor(x => x.Email, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Senha, null, new { @class = "control-label" })
+                    @Html.PasswordFor(x => x.Senha, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Senha) })
+                    @Html.ValidationMessageFor(x => x.Senha, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.SenhaConfirmacao, null, new { @class = "control-label" })
+                    @Html.PasswordFor(x => x.SenhaConfirmacao, new { @class = "form-control", placeholder = Html.DisplayNameFor(x => x.Senha) })
+                    @Html.ValidationMessageFor(x => x.SenhaConfirmacao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Identificadores</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Nome, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", id = "txtNome", apenasletrasnumeros = true, 
+                        autopesquisa = Url.Action("PesquisaUsuarioNome", "Usuario"), placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.Nome)) })
+                    @Html.ValidationMessageFor(x => x.Nome, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button  type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar este novo usuário"><i class="fa fa-check"></i> Salvar </button>
+        </div>
+    </div>
+}
+@section Scripts
+{  
+
+}

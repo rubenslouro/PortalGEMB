@@ -1,0 +1,42 @@
+﻿@using System.Web
+@model Domain.Dtos.TipoUsuario.Criar.Input.TipoUsuarioAdicionarInModel
+@{
+    ViewData["Title"] = "Novo tipo de usuário";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Adicionar", "TipoUsuario", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 top-bar">
+            <a title="Clique aqui para ser direcionado a listagem de tipos de usuários" class="btn btn-primary pull-right" href="@Url.Action("Index", "TipoUsuario", new {Area = "Administrativo"})"><i class="fa fa-th-list"></i> Tipos Usuário</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Dados do novo tipo de usuário</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Descricao, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control", id = "txtNome", apenasletrasnumeros = true, autopesquisa = Url.Action("PesquisaTipoUsuarioDescricao", "TipoUsuario"), placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.Descricao)) })
+                    @Html.ValidationMessageFor(x => x.Descricao, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success " title="Clique aqui para salvar este novo tipo de usuário"><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+@section Scripts
+{
+
+}

@@ -1,0 +1,3 @@
+﻿C:\Users\wladmir\Desktop\Sources\MainServiceDDD\docker-compose.override.yml
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\docker-compose.yml
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\.dockerignore

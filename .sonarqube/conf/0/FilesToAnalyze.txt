@@ -1,0 +1,9 @@
+﻿C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\ClassAnalizer.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\EnumOperations.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\FileOperations.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\GeradorSenhas.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\GeradorStrings.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\ImageOperation.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\ModelValidator.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Util\TextOperation.cs
+C:\Users\wladmir\Desktop\Sources\MainServiceDDD\CoreApp\UtilService\Properties\launchSettings.json

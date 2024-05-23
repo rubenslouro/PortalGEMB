@@ -1,0 +1,163 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <UserSecretsId>8f9478bc-2ada-4b0c-b199-c385ed7edf77</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+    <DockerfileContext>..\..</DockerfileContext>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <Configurations>Debug;Release;</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Areas\Administrativo\Data\**" />
+    <Compile Remove="wwwroot\appdep\**" />
+    <Compile Remove="wwwroot\UploadSistema\**" />
+    <Content Remove="Areas\Administrativo\Data\**" />
+    <Content Remove="wwwroot\appdep\**" />
+    <Content Remove="wwwroot\UploadSistema\**" />
+    <EmbeddedResource Remove="Areas\Administrativo\Data\**" />
+    <EmbeddedResource Remove="wwwroot\appdep\**" />
+    <EmbeddedResource Remove="wwwroot\UploadSistema\**" />
+    <None Remove="Areas\Administrativo\Data\**" />
+    <None Remove="wwwroot\appdep\**" />
+    <None Remove="wwwroot\UploadSistema\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\appimages\banner1.svg" />
+    <Content Remove="wwwroot\appimages\banner2.svg" />
+    <Content Remove="wwwroot\appimages\banner3.svg" />
+    <Content Remove="wwwroot\appimages\banner4.svg" />
+    <Content Remove="wwwroot\lib\CalangoJS\DepinjectService.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Administrativo\Views\Atendimento\Adicionar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Atendimento\Historico.cshtml" />
+    <None Include="Areas\Administrativo\Views\Atendimento\Visualizar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Atendimento\Index.cshtml" />
+    <None Include="Areas\Administrativo\Views\ConfiguracaoGeral\Editar.cshtml" />
+    <None Include="Areas\Administrativo\Views\ConfiguracaoGeral\Index.cshtml" />
+    <None Include="Areas\Administrativo\Views\Disciplina\Editar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Disciplina\Adicionar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\AlterarSenhaMenuItem.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\Dialogs.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\LayoutHead.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\LayoutMenu.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\Scripts.cshtml" />
+    <None Include="Areas\Administrativo\Views\Partial\Style.cshtml" />
+    <None Include="Areas\Administrativo\Views\Principal\AlterarSenha.cshtml" />
+    <None Include="Areas\Administrativo\Views\Principal\Index.cshtml" />
+    <None Include="Areas\Administrativo\Views\Principal\QrReader.cshtml" />
+    <None Include="Areas\Administrativo\Views\Shared\Error.cshtml" />
+    <None Include="Areas\Administrativo\Views\Shared\_Layout.cshtml" />
+    <None Include="Areas\Administrativo\Views\TurmaAluno\Adicionar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Turma\Adicionar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Usuario\Adicionar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Usuario\Editar.cshtml" />
+    <None Include="Areas\Administrativo\Views\Usuario\Index.cshtml" />
+    <None Include="Areas\Administrativo\Views\Usuario\Configuracoes.cshtml" />
+    <None Include="Views\Partial\AlertDialogErroRedirectView.cshtml" />
+    <None Include="Views\Partial\AlertDialogErroView.cshtml" />
+    <None Include="Views\Partial\AlertDialogOKRedirectView.cshtml" />
+    <None Include="Views\Partial\AlertDialogOKView.cshtml" />
+    <None Include="Views\Partial\AlertDialogSending.cshtml" />
+    <None Include="Views\Partial\AlertDialogYesNoView.cshtml" />
+    <None Include="Views\Partial\DialogVisualizadorDeImagensView.cshtml" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\jQuery-1.12.4\jquery-1.12.4.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\jQuery-1.12.4\jquery-1.12.4.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\dataTables.responsive.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\dataTables.responsive.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.bootstrap.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.bootstrap.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.bootstrap4.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.bootstrap4.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.foundation.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.foundation.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.jqueryui.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.jqueryui.min.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.semanticui.js" />
+    <None Include="wwwroot\lib\datatables_new\datatables-plugins\Responsive-2.2.3\js\responsive.semanticui.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.bootstrap.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.foundation.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.foundation.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.jqueryui.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.jqueryui.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.semanticui.js" />
+    <None Include="wwwroot\lib\datatables_new\js\dataTables.semanticui.min.js" />
+    <None Include="wwwroot\lib\datatables_new\js\jquery.dataTables.js" />
+    <None Include="wwwroot\lib\datatables_new\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\lib\font-awesome\css\font-awesome.css.map" />
+    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\lib\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\lib\font-awesome\less\animated.less" />
+    <None Include="wwwroot\lib\font-awesome\less\bordered-pulled.less" />
+    <None Include="wwwroot\lib\font-awesome\less\core.less" />
+    <None Include="wwwroot\lib\font-awesome\less\extras.less" />
+    <None Include="wwwroot\lib\font-awesome\less\fixed-width.less" />
+    <None Include="wwwroot\lib\font-awesome\less\font-awesome.less" />
+    <None Include="wwwroot\lib\font-awesome\less\icons.less" />
+    <None Include="wwwroot\lib\font-awesome\less\larger.less" />
+    <None Include="wwwroot\lib\font-awesome\less\list.less" />
+    <None Include="wwwroot\lib\font-awesome\less\mixins.less" />
+    <None Include="wwwroot\lib\font-awesome\less\path.less" />
+    <None Include="wwwroot\lib\font-awesome\less\rotated-flipped.less" />
+    <None Include="wwwroot\lib\font-awesome\less\screen-reader.less" />
+    <None Include="wwwroot\lib\font-awesome\less\spinning.less" />
+    <None Include="wwwroot\lib\font-awesome\less\stacked.less" />
+    <None Include="wwwroot\lib\font-awesome\less\variables.less" />
+    <None Include="wwwroot\lib\font-awesome\scss\font-awesome.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_animated.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_core.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_extras.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_fixed-width.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_icons.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_larger.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_list.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_mixins.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_path.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_screen-reader.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_spinning.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_stacked.scss" />
+    <None Include="wwwroot\lib\font-awesome\scss\_variables.scss" />
+    <None Include="wwwroot\lib\metisMenu\metisMenu.js" />
+    <None Include="wwwroot\lib\metisMenu\metisMenu.min.js" />
+    <None Include="wwwroot\lib\QrCode\instascan.min.js" />
+    <None Include="wwwroot\lib\QrCode\qrcode.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="JQuery-Mask-Plugin" Version="1.5.3-r2" />
+    <PackageReference Include="jQuery.InputMask" Version="5.0.7" />
+    <PackageReference Include="jQuery.UI.Combined" Version="1.13.2" />
+    <PackageReference Include="jQuery.Validation" Version="1.19.5" />
+    <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.384" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreApp\Infra\InfraDatabase.csproj" />
+    <ProjectReference Include="..\ApplicationServices\ApplicationServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\appjs\Administrativo\Assistido\PageController.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

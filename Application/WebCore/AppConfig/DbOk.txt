@@ -1,0 +1,1 @@
+Server=BINHO-ACER\SQLEXPRESS;Database=GrupoEspirita2;User Id=sa;Password=developer1234;TrustServerCertificate=True

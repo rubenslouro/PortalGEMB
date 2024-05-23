@@ -1,0 +1,116 @@
+﻿@using System.Web
+@model Domain.Dtos.ConfiguracaoGeral.Input.ConfiguracaoGeralInstalarConfiguracaoInModel
+@{
+    ViewData["Title"] = "Calango - Guia de instalação";
+    Layout = "~/Views/Shared/_LayoutLimpo.cshtml";
+}
+
+@using (Html.BeginForm("ConfigurarDados", "Principal", FormMethod.Post, new { id = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+<div class="backgroung-install">
+    <div class="panel panel-primary panel-rounded">
+        <div class="panel-heading">
+            @ViewData["Title"] <i class="fa fa-desktop pull-right"></i>
+        </div>
+        
+        <div class="panel-body backgroud-permissoes-body ">
+            <fieldset>
+                <legend>Passo 2 de 2</legend>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info">
+                            <p><b>Configuração de seu ambiente</b></p>
+                            <p>Chegamos ao último passo de nossa instalação!</p>
+                            <p>Algumas informações <b>importantes</b> serão requeridas abaixo. Elas são necessárias para o correto funcionamento do sistema.</p>
+                            <p>Os dados abaixo devem ser informados <b>atentamente</b> pois, caso haja erros nas informações, funcionalidades básicas do sistema estarão comprometidas.</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-lg-12">
+                    @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <fieldset>
+                        <legend>Dados do Site <img id="calangoImg" class="img-responsive center-block transparencia-leve metade-tamanho img-logo-login" src="~/appimages/logo.png" title="Calango" alt="Calango"/></legend>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.UrlSite, null, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.UrlSite, new { @class = "form-control text-lowercase", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.UrlSite)) })
+                                    @Html.ValidationMessageFor(x => x.UrlSite, null, new { @class = "alerta-campo" })
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Dados do usuário Master</legend>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.EmailUsuarioMaster, null, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.EmailUsuarioMaster, new { @class = "form-control text-lowercase", id = "txtEmailUsuarioMaster", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.EmailUsuarioMaster)) })
+                                    @Html.ValidationMessageFor(x => x.EmailUsuarioMaster, null, new { @class = "alerta-campo" })
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.SenhaMaster, null, new { @class = "control-label" })
+                                    @Html.PasswordFor(x => x.SenhaMaster, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.SenhaMaster)) })
+                                    @Html.ValidationMessageFor(x => x.SenhaMaster, null, new { @class = "alerta-campo" })
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <div class="form-group">
+                                    @Html.LabelFor(x => x.SenhaConfirmacaoMaster, null, new { @class = "control-label" })
+                                    @Html.PasswordFor(x => x.SenhaConfirmacaoMaster, new { @class = "form-control", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.SenhaConfirmacaoMaster)) })
+                                    @Html.ValidationMessageFor(x => x.SenhaConfirmacaoMaster, null, new { @class = "alerta-campo" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert alert-info">
+                                    <p><b>Atenção</b></p>
+                                    <p>
+                                        Fique atento ao criar o usuário Master. <b>Guarde</b> todos os dados relacionados a ele de forma <b>segura</b>.
+                                    </p>
+                                    <p>
+                                        Este usuário deve ser utilizado apenas em <b>situações extremas</b> onde nenhum
+                                        usuário <b>Gerente</b> seja capaz de executar uma determinada ação. Recomendamos de forma severa a
+                                        <b>não utilização</b> deste usuário.
+                                    </p>
+                                    <p>Sua utilização deve ser <b>estrita</b> ao cadastramento do primeiro usuário do tipo <b>Gerente</b>.</p>
+                                    <p>O usuário Master possui <b>restrições</b> importantes:</p>
+                                    <ul>
+                                        <li>Não permite alteração de qualquer dado de seu cadastro</li>
+                                        <li>Não pode ter sua senha alterada</li>
+                                        <li>Não recebe email´s</li>
+                                        <li>Não existe mais de um usuário deste tipo no banco de dados</li>
+                                    </ul>
+                                    <p>
+                                        Portanto, conforme percebido, seu uso é limitado e restrito.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="subm" type="submit" class="btn btn-success " title="Clique aqui para instalar o sistema">Instalar <i class="fa fa-hdd-o"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+   
+}
+
+

@@ -1,0 +1,42 @@
+﻿@using System.Web
+@model Domain.Dtos.ConfiguracaoGeral.Input.ConfiguracaoGeralEditarConfiguracaoInModel
+@{
+    ViewData["Title"] = "Modificar configurações básicas";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+
+}
+@using (Html.BeginForm("Editar", "ConfiguracaoGeral", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.CodUsuarioAcao)
+    <div class="row">
+        <div class="col-md-12 top-bar">
+           <a title="Clique aqui para vizualizar de configurações básicas do sistema." class="btn btn-primary pull-right" href="@Url.Action("Index", "ConfiguracaoGeral", new {Area = "Administrativo"})"><i class="fa fa-gear"></i> Configurações básicas</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ValidationSummary(null, new { @class = "alert alert-danger escondido", validator = "true" })
+        </div>
+    </div>
+    <fieldset>
+        <legend>Sobre o site</legend>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(x => x.UrlSite, null, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.UrlSite, new { @class = "form-control text-lowercase", id = "txtSmtp", placeholder = HttpUtility.HtmlDecode(Html.DisplayNameFor(x => x.UrlSite)) })
+                    @Html.ValidationMessageFor(x => x.UrlSite, null, new { @class = "alerta-campo" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <button type="submit" class="btn btn-primary btn-success" title="Clique aqui para salvar as alterações das informações no cadastro de configurações."><i class="fa fa-check"></i> Salvar</button>
+        </div>
+    </div>
+}
+
+

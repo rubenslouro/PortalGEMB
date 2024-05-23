@@ -1,0 +1,15 @@
+﻿<div class="modal fade" data-alertDialogOKRedirect tabindex="-1" role="dialog" aria-labelledbdialogsy="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Aviso</h4>
+            </div>
+            <div class="modal-body" data-alertDialogOKRedirectMensagemContent>
+                @ViewData["AlertDialogOKRedirectText"]
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-alertDialogOKRedirectUrl onclick="$(this).attr('disabled', 'true'); $(this).text('Aguarde');" href="@ViewData["AlertDialogOKRedirectUrl"]" >OK</a>
+            </div>
+        </div>
+    </div>
+</div>

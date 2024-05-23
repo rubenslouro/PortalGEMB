@@ -1,0 +1,101 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
+using Domain.Dtos.Usuario.AlterarSenha.Input;
+using WebCore.Areas.AreaManager;
+using WebCore.Services.LoginAuthentication;
+using WebCore.Services.PopUp;
+
+namespace WebCore.Areas.Administrativo.Controllers;
+
+/// <inheritdoc />
+[CheckNivelPermissao]
+[Area("Administrativo")]
+public class PrincipalController : Controller
+{
+    private readonly ILoginAuthenticationService _loginAuthenticationService;
+
+    /// <inheritdoc />
+    public PrincipalController(          
+        ILoginAuthenticationService loginAuthenticationService)
+    {
+        _loginAuthenticationService = loginAuthenticationService;
+    }
+
+    /// <summary>
+    /// Página inical da aplicação após logado
+    /// </summary>
+    /// <returns></returns>
+    public async Task<ActionResult> Index()
+    {
+        ViewData["UsuarioLogado"] = await _loginAuthenticationService.UsuarioLogadoAsync();
+        return View();
+    }
+
+    /// <summary>
+    /// Página do leitor de QRCode
+    /// </summary>
+    /// <returns></returns>
+    public ActionResult QrReader()
+    {
+            
+        return View();
+    }
+
+    /// <summary>
+    /// Página de alteração de senha de usuário
+    /// </summary>
+    /// <returns></returns>
+    public  async Task<ActionResult> AlterarSenha()
+    {
+            
+        try
+        {
+            var usuarioLogado =  await _loginAuthenticationService.UsuarioLogadoAsync();
+            ViewData["usuario"] = usuarioLogado;
+            var mudarSenhaUsuarioModel = new UsuarioAlterarSenhaInModel { CodUsuario = usuarioLogado.Codigo };
+                
+            return View(mudarSenhaUsuarioModel);
+        }
+        catch (Exception ex)
+        {
+            this.AlertaMsgErroRedirect(ex.Message, Url.Action("Index", "Principal") ?? string.Empty);
+        }
+        return View();
+    }
+
+    /// <summary>
+    /// Post da página de alteração de senha de usuário
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public async Task<IActionResult> AlterarSenha(UsuarioAlterarSenhaInModel model)
+    {
+        try
+        {
+            var usuarioLogado = await _loginAuthenticationService.UsuarioLogadoAsync();
+            ViewData["usuario"] = usuarioLogado;
+            if (ModelState.IsValid)
+            {
+                model.CodUsuario = usuarioLogado.Codigo;
+                await _loginAuthenticationService.AlterarSenhaAsync(model);
+
+                var mensagem = "Senha do usuário foi alterada com sucesso! ";
+                this.AlertaMsgRedirect(mensagem, Url.Action("Index", "Principal") ?? string.Empty);
+
+                ModelState.Clear();
+                return View(model);
+            }
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError(string.Empty, ex.Message);
+        }
+
+        return View(model);
+    }
+
+
+
+}

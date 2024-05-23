@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Leitor QR Code";
+    ViewData["Caption"] = "Leitor QR Code";
+    Layout = "~/Areas/Administrativo/Views/Shared/_Layout.cshtml";
+}
+
+<fieldset>
+    <legend>Leitor QR Code</legend>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="input-group">
+                <select class="form-control" id="selectCamera"> </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-info" id="btnCarregaCam"><i class="fa fa-camera"></i> Selecionar câmera</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <video id="camPreview"></video>
+        </div>
+    </div>
+</fieldset>
+@section Scripts
+{
+    <script type="module" src="~/appjs/Principal/QrReader/QrReaderPage.js"></script>
+}
+
